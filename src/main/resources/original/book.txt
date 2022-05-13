@@ -1,0 +1,6 @@
+Are you curious about making you resources visible in your program?
+In Eclipse, use the Java Build Path to build classpaths in order to compile your work. Eclipse has several options for building paths, including building paths from source folders, libraries and projects. You can also edit your classpaths in order to adapt to ongoing changes in your project.
+Right click on the name of the project that you want to build a classpath for in the Package Explorer bar. Click "Build Path" and then choose "Configure Build Path...".
+Click "Add Folder..." to add the source that you want to build the path from in the Source tab.
+That's all! Do you have more questions? Just ask your trainers, they can help you.
+This number in next word requi4red to check if you wrote correct regexp for words.
