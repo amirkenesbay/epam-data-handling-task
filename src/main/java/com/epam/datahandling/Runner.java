@@ -6,6 +6,6 @@ package com.epam.datahandling;
 public class Runner {
     public static void main(String[] args) {
         DataController dataController = new DataController();
-        DataController.run(Integer.parseInt(args[0]));
+        dataController.run(Integer.parseInt(args[0]));
     }
 }

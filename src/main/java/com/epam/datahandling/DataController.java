@@ -17,13 +17,14 @@ public class DataController {
     private static final String PATH_TO_RESOURCES = "\\src\\main\\resources\\";
     private static final String PATH_TO_SERIALIZED_TEXT_FILE = PATH_TO_RESOURCES + "serialized-text-processor.ser";
     private static final String SRC = System.getProperty(KEY_FOR_USER_DIR) + PATH_TO_RESOURCES + "original\\book.txt";
-    private static final String DEST = System.getProperty(KEY_FOR_USER_DIR) + PATH_TO_RESOURCES + "backup\\book.bak";
+    private static final String DEST = System.getProperty(KEY_FOR_USER_DIR) + PATH_TO_RESOURCES + "backup\\" +
+            "book.bak";
     private static final Logger LOGGER = (Logger) LogManager.getLogger(DataController.class);
     private static final int NUMBER_COLUMN_WIDTH = 13;
     private static final int SENTENCE_COLUMN_WIDTH = 80;
     private static final int WORD_COLUMN_WIDTH = 13;
 
-    static void run(int maxDataLength) {
+    void run(int maxDataLength) {
         try {
             BackupUtils.backup(SRC, DEST);
         } catch (IOException e) {
@@ -39,7 +40,7 @@ public class DataController {
         addSourceFile(SRC, tableGenerator.generate(textSort, maxDataLength));
     }
 
-    static Text sortSentence(Text text){
+    Text sortSentence(Text text){
         Sentence[] sentencesSort = text.getSentences();
         Arrays.sort(sentencesSort, new LengthComparator());
         StringBuilder builder = new StringBuilder();
