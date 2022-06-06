@@ -31,18 +31,63 @@ public class TableGenerator {
 
     public String generate(Text text, int maxDataLength) {
         StringBuilder table = new StringBuilder();
+        printHeading(table);
+        generatingTableContent(table, text, maxDataLength);
         return table.toString();
     }
 
-    void generateTableContent(StringBuilder table, Text text, int maxDataLength) {
+    void generatingTableContent(StringBuilder table, Text text, int maxDataLength) {
         for (int i = 1; i < text.getSentences().length + 1; i++) {
-
+            printNumberColumnWidth(table, i);
+            printSentenceColumnWidth(table, text, i, maxDataLength);
+            printWordColumnWidth(table, text, i);
+            printBorder(table);
+            table.append(LINE_BREAK);
         }
     }
 
-    void printWordColumnWidthPartOne(Text text, StringBuilder table, int i){
+    void printNumberColumnWidth(StringBuilder table, int i) {
+        table.append(FORWARD_SLASH);
+        if (i > NUMBER_OF_DIGIT_IN_NUMBER) {
+            printNumberColumnWidthPartOne(table, i);
+        } else {
+            printNumberColumnWidthPartTwo(table, i);
+        }
+        table.append(FORWARD_SLASH);
+    }
+
+    void printNumberColumnWidthPartOne(StringBuilder table, int i) {
+        for (int j = 0; j < numberColumnWidth; j++) {
+            if (j == numberColumnWidth / FIND_MIDDLE) {
+                table.append(i);
+            } else {
+                table.append(SPACE);
+            }
+        }
+    }
+
+    void printNumberColumnWidthPartTwo(StringBuilder table, int i) {
+        for (int j = 0; j < numberColumnWidth; j++) {
+            if (j == numberColumnWidth / FIND_MIDDLE) {
+                table.append(i);
+            } else {
+                table.append(SPACE);
+            }
+        }
+    }
+
+    void printWordColumnWidth(StringBuilder table, Text text, int i) {
+        table.append(FORWARD_SLASH);
+        if (text.getSentences()[i - 1].getWords().length > NUMBER_OF_DIGIT_IN_NUMBER) {
+            printWordColumnWidthPartOne(text, table, i);
+        } else {
+            printWordColumnWidthPartTwo(text, table, i);
+        }
+    }
+
+    void printWordColumnWidthPartOne(Text text, StringBuilder table, int i) {
         for (int j = 0; j < wordColumnWidth - 1; j++) {
-            if(j == wordColumnWidth / FIND_MIDDLE){
+            if (j == wordColumnWidth / FIND_MIDDLE) {
                 table.append(text.getSentences()[i - 1].getWords().length);
             } else {
                 table.append(SPACE);
@@ -50,9 +95,9 @@ public class TableGenerator {
         }
     }
 
-    void printWordColumnWidthPartTwo(Text text, StringBuilder table, int i){
+    void printWordColumnWidthPartTwo(Text text, StringBuilder table, int i) {
         for (int j = 0; j < wordColumnWidth; j++) {
-            if(j == wordColumnWidth / FIND_MIDDLE){
+            if (j == wordColumnWidth / FIND_MIDDLE) {
                 table.append(text.getSentences()[i - 1].getWords().length);
             } else {
                 table.append(SPACE);
